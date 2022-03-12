@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/Planet.gd" type="Script" id=1]
+[ext_resource path="res://ressources/img/Atmos.png" type="Texture" id=2]
+[ext_resource path="res://ressources/img/Planet.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 79.7969
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 288.111
+
+[node name="Planet" type="StaticBody2D" groups=[
+"Planet",
+]]
+script = ExtResource( 1 )
+
+[node name="Atmos" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0.392157 )
+scale = Vector2( 1.5, 1.5 )
+z_index = -2
+texture = ExtResource( 2 )
+
+[node name="Atmos" type="Sprite" parent="Atmos"]
+scale = Vector2( 1.1, 1.1 )
+z_index = -2
+texture = ExtResource( 2 )
+
+[node name="Atmos2" type="Sprite" parent="Atmos"]
+scale = Vector2( 1.18, 1.18 )
+z_index = -2
+texture = ExtResource( 2 )
+
+[node name="Atmos3" type="Sprite" parent="Atmos"]
+scale = Vector2( 1.25, 1.25 )
+z_index = -2
+texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.114, 0.114 )
+texture = ExtResource( 3 )
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 7.62939e-06, 0 )
+scale = Vector2( 3, 3 )
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="hitbox" type="CollisionShape2D" parent="hitbox"]
+scale = Vector2( 1.01, 1.01 )
+shape = SubResource( 1 )
+
+[node name="gravBox" type="Area2D" parent="." groups=[
+"gravbox",
+]]
+scale = Vector2( 3, 3 )
+space_override = 1
+gravity_point = true
+gravity = 235.0
+linear_damp = 10.0
+
+[node name="gravity" type="CollisionPolygon2D" parent="gravBox"]
+position = Vector2( -89.6667, -18.6667 )
+scale = Vector2( 0.8, 0.8 )
+polygon = PoolVector2Array( 111.975, -56.7864, 90.9269, -53.724, 71.5498, -45.9286, 54.8455, -32.8992, 42.1512, -15.8549, 33.948, 3.97824, 31.6329, 23.9019, 34.25, 44.841, 42.0011, 63.5943, 54.7521, 80.6328, 71.7906, 93.9142, 91.0752, 102.044, 112.377, 104.772, 132.756, 101.988, 152.449, 93.9699, 169.321, 80.6947, 181.738, 64.3244, 189.874, 45.1469, 192.518, 24.3293, 189.818, 3.23607, 181.912, -16.2831, 169.105, -32.542, 152.121, -45.9286, 133.023, -53.7796 )
+
+[node name="Expulsor" type="Area2D" parent="." groups=[
+"expulsor",
+]]
+
+[node name="expulsor" type="CollisionPolygon2D" parent="Expulsor"]
+position = Vector2( -335.938, -72 )
+scale = Vector2( 3, 3 )
+polygon = PoolVector2Array( 111.953, -57.0052, 112, -5.48438, 119.776, -4.38646, 126.796, -1.484, 132.999, 3.38239, 137.72, 9.38168, 140.635, 16.5735, 141.553, 24.0027, 140.629, 31.8914, 137.641, 38.902, 133.087, 44.9194, 126.907, 49.8002, 119.688, 52.7185, 112.024, 53.7209, 104.583, 52.75, 97.3622, 49.8259, 91.0557, 44.8482, 86.4647, 38.7563, 83.6046, 31.8733, 82.5199, 24.0852, 83.3474, 16.9418, 86.4064, 9.37767, 90.9671, 3.31528, 97.3076, -1.57914, 104.372, -4.39584, 111.99, -5.47136, 111.951, -57.0052, 91.1146, -54, 71.2526, -46.6536, 54.5885, -33.1615, 41.58, -15.9442, 33.5885, 4.56771, 30.9063, 23.0599, 33.4219, 44.401, 41.0651, 62.8281, 54.2344, 80.8255, 70.5495, 93.6563, 90.0859, 101.667, 110.924, 104.167, 131.44, 102.008, 151.099, 94.1641, 169.266, 80.1693, 181.268, 64.4063, 189.448, 45.7396, 192.112, 24.388, 189.292, 3.02083, 181.664, -16.4848, 169.17, -31.932, 150.985, -46.455, 132.789, -54.0938 )
+
+[node name="maxGravBox" type="Area2D" parent="." groups=[
+"maxGravBox",
+]]
+scale = Vector2( 3, 3 )
+space_override = 1
+gravity_point = true
+gravity = 500.0
+
+[node name="maxGravity" type="CollisionPolygon2D" parent="maxGravBox"]
+position = Vector2( -112.398, -24.1425 )
+polygon = PoolVector2Array( 112.354, -56.8388, 112.299, -39.9264, 95.4682, -37.4691, 79.9639, -31.2325, 66.6063, -20.8447, 56.4781, -7.12318, 49.9383, 8.64235, 48.0939, 24.5858, 50.2557, 41.3406, 56.2996, 56.3081, 66.5292, 69.9632, 80.1741, 80.5834, 95.5895, 87.0845, 112.689, 89.2181, 128.938, 87.0378, 144.749, 80.5878, 158.148, 69.9852, 168.12, 56.9134, 174.581, 41.5816, 176.686, 24.9155, 174.41, 7.9785, 168.199, -7.57432, 158.268, -20.0545, 144.436, -31.2387, 129.089, -37.515, 112.311, -39.9264, 112.354, -56.8388, 133.167, -53.9399, 151.333, -46.2732, 169.667, -31.4399, 181.993, -16.3306, 189.66, 3.16941, 192.493, 24.5355, 189.826, 45.8689, 181.66, 64.5355, 169.66, 80.2923, 151.493, 94.2923, 131.826, 102.126, 111.326, 104.292, 90.4929, 101.792, 70.9929, 93.7923, 54.6595, 80.959, 41.4929, 62.959, 33.8545, 44.541, 31.3545, 23.2076, 34.0212, 4.70763, 42.0212, -15.7924, 55.0212, -33.0055, 71.6878, -46.5055, 91.5212, -53.8388 )
+
+[node name="nonSpawnableZone" type="Area2D" parent="." groups=[
+"nonSpawnable",
+]]
+
+[node name="zone" type="CollisionShape2D" parent="nonSpawnableZone"]
+shape = SubResource( 2 )
+
+[node name="SpawnPlayer1" type="Position2D" parent="."]
+position = Vector2( -288, 0 )
+rotation = -1.5708
+
+[node name="SpawnPlayer2" type="Position2D" parent="."]
+position = Vector2( 288, 0 )
+rotation = 1.5708
+
+[connection signal="area_entered" from="nonSpawnableZone" to="." method="_on_nonSpawnableZone_area_entered"]

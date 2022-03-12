@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/UltraLowBloup.wav-48effc6df9498a4a701de9e389fbd3c4.sample"
+
+[deps]
+
+source_file="res://ressources/sound/UltraLowBloup.wav"
+dest_files=[ "res://.import/UltraLowBloup.wav-48effc6df9498a4a701de9e389fbd3c4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

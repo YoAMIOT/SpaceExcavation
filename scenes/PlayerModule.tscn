@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://scenes/HealthBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Excavator.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Speed.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Spectrum.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/PlayerModule.gd" type="Script" id=6]
+[ext_resource path="res://scenes/Station.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/RessourcesCount.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/EnergiumCount.tscn" type="PackedScene" id=9]
+
+[node name="PlayerModule" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Excavator" parent="." instance=ExtResource( 2 )]
+position = Vector2( -1, 23 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -1 )
+mode = 1
+
+[node name="Station" parent="." instance=ExtResource( 7 )]
+visible = false
+position = Vector2( 0, 56 )
+
+[node name="Speed" parent="." instance=ExtResource( 4 )]
+visible = false
+scale = Vector2( 1.5, 1.5 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="Spectrum" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="RessourcesCount" parent="." instance=ExtResource( 8 )]
+visible = false
+scale = Vector2( 1.5, 1.5 )
+
+[node name="EnergiumCount" parent="." instance=ExtResource( 9 )]
+visible = false
+scale = Vector2( 1.5, 1.5 )
+
+[node name="OriginRot" type="Position2D" parent="."]
+
+[connection signal="creatingLevel" from="." to="Player" method="_on_PlayerModule_creatingLevel"]
+[connection signal="creatingLevel" from="." to="Station" method="_on_PlayerModule_creatingLevel"]
+[connection signal="doneCreatingLevel" from="." to="Player" method="_on_PlayerModule_doneCreatingLevel"]
+[connection signal="doneCreatingLevel" from="." to="Station" method="_on_PlayerModule_doneCreatingLevel"]
+[connection signal="canSense" from="Excavator" to="Player" method="_on_Excavator_canSense"]
+[connection signal="cantSense" from="Excavator" to="Player" method="_on_Excavator_cantSense"]
+[connection signal="enterExpulsor" from="Excavator" to="Player" method="_on_Excavator_enterExpulsor"]
+[connection signal="enterGravField" from="Excavator" to="Player" method="_on_Excavator_enterGravField"]
+[connection signal="enterMaxField" from="Excavator" to="Player" method="_on_Excavator_enterMaxField"]
+[connection signal="exitExpulsor" from="Excavator" to="Player" method="_on_Excavator_exitExpulsor"]
+[connection signal="exitGravField" from="Excavator" to="Player" method="_on_Excavator_exitGravField"]
+[connection signal="exitMaxField" from="Excavator" to="Player" method="_on_Excavator_exitMaxField"]
+[connection signal="inStationZone" from="Excavator" to="Player" method="_on_Excavator_inStationZone"]
+[connection signal="outStationZone" from="Excavator" to="Player" method="_on_Excavator_outStationZone"]
+[connection signal="dropOn" from="Player" to="Excavator" method="_on_Player_dropOn"]

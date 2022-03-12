@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/High.wav-e2cfc31626e9f4b183b2e4f774a32010.sample"
+
+[deps]
+
+source_file="res://ressources/sound/High.wav"
+dest_files=[ "res://.import/High.wav-e2cfc31626e9f4b183b2e4f774a32010.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

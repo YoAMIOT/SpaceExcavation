@@ -1,0 +1,130 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/player.gd" type="Script" id=1]
+[ext_resource path="res://ressources/img/Ship.png" type="Texture" id=2]
+[ext_resource path="res://ressources/img/ShipOnPlanet.png" type="Texture" id=3]
+[ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ressources/img/ShipShooting.png" type="Texture" id=5]
+[ext_resource path="res://scenes/Loading.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ressources/img/ShipDead.png" type="Texture" id=7]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "normal",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ) ],
+"loop": true,
+"name": "shooting",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 7 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "onPlanet",
+"speed": 5.0
+} ]
+
+[node name="Player" type="RigidBody2D" groups=[
+"player",
+]]
+mass = 300.0
+linear_damp = 0.5
+angular_damp = 5.0
+script = ExtResource( 1 )
+Bullet = ExtResource( 4 )
+
+[node name="Ship" type="AnimatedSprite" parent="."]
+position = Vector2( -2, 9.53674e-07 )
+scale = Vector2( 1.2, 1.06667 )
+frames = SubResource( 1 )
+animation = "normal"
+
+[node name="LoadingScreen" parent="." instance=ExtResource( 6 )]
+position = Vector2( -650.7, -368 )
+scale = Vector2( 0.670839, 0.661765 )
+z_index = 100
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+smoothing_speed = 7.0
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+position = Vector2( -80, 80 )
+polygon = PoolVector2Array( 55.3565, -48.0141, 60.0783, -48.1461, 66.7525, -51.3163, 71.925, -51.3163, 86.9547, -51.2678, 92.4064, -51.1912, 97.1727, -47.9691, 99.6308, -50.1931, 99.5604, -57.6591, 96.0956, -66.2744, 99.6489, -74.5517, 99.5899, -82.1027, 97.2561, -87.3948, 97.1412, -92.6405, 94.2394, -93.0071, 94.7448, -98.927, 90.0311, -98.9166, 88.3, -98.3317, 82.5421, -105.834, 80.0393, -106.585, 76.8819, -105.796, 71.375, -98.4375, 69.5867, -98.9072, 64.8109, -98.9568, 65.3756, -92.8166, 62.414, -92.7243, 62.375, -87.5625, 59.9078, -82.099, 59.9078, -74.9395, 61.6676, -72.8067, 75.2271, -70.1789, 85.1076, -65.5539, 96, -64, 96.0881, -54.7132, 65.4516, -52.2047 )
+disabled = true
+
+[node name="MergePos" type="Position2D" parent="."]
+position = Vector2( -0.9504, 23.7689 )
+
+[node name="Cooldown" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="hitBox" type="Area2D" parent="." groups=[
+"player",
+]]
+
+[node name="Collision" type="CollisionPolygon2D" parent="hitBox"]
+position = Vector2( -80, 80 )
+polygon = PoolVector2Array( 55.3565, -48.0141, 69.7569, -48.1718, 72.0168, -51.2726, 86.9563, -51.4914, 90.3063, -48.0667, 97.1727, -47.9691, 99.6308, -50.1931, 99.5604, -57.6591, 96.0956, -66.2744, 99.6489, -74.5517, 99.5899, -82.1027, 92.6657, -93.5742, 82.5421, -105.834, 80.0393, -106.585, 76.8819, -105.796, 67.244, -93.943, 59.9078, -82.099, 59.9078, -74.9395, 61.8108, -69.795, 63.6056, -65.9297, 61.5583, -61.9137 )
+
+[node name="Gun" type="Node2D" parent="."]
+
+[node name="RGunPos" type="Position2D" parent="Gun"]
+position = Vector2( 12.441, -20.2 )
+rotation = -1.5708
+
+[node name="LGunPos" type="Position2D" parent="Gun"]
+position = Vector2( -12.786, -20.2 )
+rotation = -1.5708
+
+[node name="Cooldown" type="Timer" parent="Gun"]
+
+[node name="DeathCooldown" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="PlanetSensor" type="Node2D" parent="."]
+
+[node name="ThinSensor" type="Area2D" parent="PlanetSensor"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlanetSensor/ThinSensor"]
+position = Vector2( 0, -589.23 )
+scale = Vector2( 1, 4.12092 )
+polygon = PoolVector2Array( 0, 133.278, 64, -3786.23, -64, -3786.23 )
+
+[node name="LargeSensor" type="Area2D" parent="PlanetSensor"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlanetSensor/LargeSensor"]
+position = Vector2( 0, -589.23 )
+scale = Vector2( 1, 4.12092 )
+polygon = PoolVector2Array( 0, 133.278, 2176, -3786.23, 64, -3786.23, 0, 133.278, -64, -3786.23, -2176, -3786.23 )
+
+[node name="LargestSensor" type="Area2D" parent="PlanetSensor"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlanetSensor/LargestSensor"]
+position = Vector2( 0, -589.23 )
+scale = Vector2( 1, 4.12092 )
+polygon = PoolVector2Array( 0, 135.22, 7232, -3646.46, 2176, -3786.23, 0, 133.278, -2176, -3786.23, -7232, -3646.46 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_Cooldown_timeout"]
+[connection signal="body_entered" from="hitBox" to="." method="_on_hitBox_body_entered"]
+[connection signal="timeout" from="DeathCooldown" to="." method="_on_DeathCooldown_timeout"]
+[connection signal="body_entered" from="PlanetSensor/ThinSensor" to="." method="_on_ThinSensor_body_entered"]
+[connection signal="body_exited" from="PlanetSensor/ThinSensor" to="." method="_on_ThinSensor_body_exited"]
+[connection signal="area_entered" from="PlanetSensor/LargeSensor" to="." method="_on_LargeSensor_area_entered"]
+[connection signal="area_exited" from="PlanetSensor/LargeSensor" to="." method="_on_LargeSensor_area_exited"]
+[connection signal="area_entered" from="PlanetSensor/LargestSensor" to="." method="_on_LargestSensor_area_entered"]
+[connection signal="area_exited" from="PlanetSensor/LargestSensor" to="." method="_on_LargestSensor_area_exited"]

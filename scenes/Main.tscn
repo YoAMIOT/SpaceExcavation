@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/BackgroundStars.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/PlayerModule.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/Main.gd" type="Script" id=3]
+[ext_resource path="res://scenes/PlanetSpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/AsteroidSpawner.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/Edges.tscn" type="PackedScene" id=7]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="EndGame" type="Timer" parent="."]
+wait_time = 600.0
+one_shot = true
+
+[node name="BackgroundStars" parent="." instance=ExtResource( 1 )]
+layer = -128
+scroll_ignore_camera_zoom = true
+
+[node name="PlanetSpawner" parent="." instance=ExtResource( 5 )]
+
+[node name="AsteroidSpawner" parent="." instance=ExtResource( 6 )]
+
+[node name="Edges" parent="." instance=ExtResource( 7 )]
+
+[node name="PlayerModule" parent="." instance=ExtResource( 2 )]
+
+[connection signal="timeout" from="EndGame" to="." method="_on_EndGame_timeout"]
+[connection signal="creatingLevel" from="PlanetSpawner" to="PlayerModule" method="_on_PlanetSpawner_creatingLevel"]
+[connection signal="doneCreatingLevel" from="PlanetSpawner" to="PlayerModule" method="_on_PlanetSpawner_doneCreatingLevel"]
+[connection signal="doneCreatingLevel" from="PlanetSpawner" to="AsteroidSpawner" method="_on_PlanetSpawner_doneCreatingLevel"]
+[connection signal="doneCreatingLevel" from="PlanetSpawner" to="." method="_on_PlanetSpawner_doneCreatingLevel"]

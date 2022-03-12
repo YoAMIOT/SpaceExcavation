@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/Asteroid.gd" type="Script" id=1]
+[ext_resource path="res://ressources/img/Asteroid.png" type="Texture" id=2]
+
+[node name="Asteroid" type="RigidBody2D" groups=[
+"Asteroid",
+]]
+mass = 1000.0
+gravity_scale = -9.0
+linear_damp = 0.0
+angular_damp = 0.0
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="Collision" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0.968933, 3.38778 )
+polygon = PoolVector2Array( -37.9072, -3.31259, -38.6584, 2.71575, -38.7286, 9.31021, -36.6941, 14.6419, -32.064, 19.5527, -26.8726, 19.6228, -17.2189, 15.2372, -8.53143, 15.2372, -0.593933, 21.2372, 5.46857, 25.6747, 15.0311, 25.6122, 22.9061, 20.6122, 31.9686, 15.4247, 35.2186, 10.4872, 38.0152, 3.48399, 37.971, -0.360908, 36.1952, -5.46803, 33.1479, -11.5627, 32.1073, -17.8061, 30.2492, -22.4142, 24.6748, -26.4278, 14.2692, -29.5495, -8.69734, -29.2522, -13.8258, -26.9481, -21.9021, -18.7824, -24.7516, -18.475, -28.9882, -15.4276 )
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="hitbox" type="CollisionPolygon2D" parent="hitbox"]
+position = Vector2( 0.968933, 3.38778 )
+polygon = PoolVector2Array( -37.9072, -3.31259, -38.6584, 2.71575, -38.7286, 9.31021, -36.6941, 14.6419, -32.064, 19.5527, -26.8726, 19.6228, -17.2189, 15.2372, -8.53143, 15.2372, -0.593933, 21.2372, 5.46857, 25.6747, 15.0311, 25.6122, 22.9061, 20.6122, 31.9686, 15.4247, 35.2186, 10.4872, 38.0152, 3.48399, 37.971, -0.360908, 36.1952, -5.46803, 33.1479, -11.5627, 32.1073, -17.8061, 30.2492, -22.4142, 24.6748, -26.4278, 14.2692, -29.5495, -8.69734, -29.2522, -13.8258, -26.9481, -21.9021, -18.7824, -24.7516, -18.475, -28.9882, -15.4276 )
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_exited" from="hitbox" to="." method="_on_hitbox_area_exited"]
